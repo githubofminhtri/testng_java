@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Selenium_Test_Suite" parallel="tests" thread-count="2">
+
+    <test name="LoginTests_Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="my.tests.SignUpTest"/>
+        </classes>
+    </test>
+
+<!--    <test name="LoginTests_Firefox">-->
+<!--        <parameter name="browser" value="firefox"/>-->
+<!--        <classes>-->
+<!--            <class name="com.mycompany.tests.LoginTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="Sanity_Group_Tests">-->
+<!--        <parameter name="browser" value="chrome"/>-->
+<!--        <classes>-->
+<!--            <class name="my.tests.SignUpTest">-->
+<!--                <methods>-->
+<!--                    <include name="testSuccessfulSignUp"/> </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+</suite>
