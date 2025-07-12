@@ -4,6 +4,18 @@
 
     <test name="LoginTests_Chrome">
         <parameter name="browser" value="chrome"/>
+        <parameter name="userName" value="tri pham"/>
+        <parameter name="email" value="tri.pham1919@yopmail.com"/>
+        <parameter name="password" value="password"/>
+        <parameter name="firstName" value="Tri"/>
+        <parameter name="lastName" value="Pham"/>
+        <parameter name="companyName" value="Company Name"/>
+        <parameter name="address1" value="address 1"/>
+        <parameter name="address2" value="address 2"/>
+        <parameter name="state" value="state"/>
+        <parameter name="city" value="city"/>
+        <parameter name="zipcode" value="zipcode"/>
+        <parameter name="mobileNumber" value="mobileNumber"/>
         <classes>
             <class name="my.tests.SignUpTest"/>
         </classes>
