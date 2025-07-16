@@ -1,65 +1,68 @@
 package my.steps;
+import com.base.Hooks;
+import com.base.TestContext;
 import io.cucumber.java.en.*;
-import my.base.TestContext;
-import my.pages.HomePage;
-import my.pages.SignUpPage;
-import org.testng.Assert;
+import com.pages.HomePage;
+import com.pages.SignUpPage;
+import org.openqa.selenium.WebDriver;
+import org.junit.Assert;
 import java.util.List;
 import java.util.Objects;
 
 
 
 public class SignUpSteps {
-    private final TestContext testContext;
-
-    // Cucumber will automatically inject TestContext instance if picocontainer is used
+    private TestContext testContext;
+    private HomePage homePage;
+    private SignUpPage signUpPage;
+    // Cucumber will automatically inject this instance if picocontainer is used
     public SignUpSteps(TestContext testContext) {
         this.testContext = testContext;
+        this.homePage = new HomePage(testContext.getDriver());
+        this.signUpPage = new SignUpPage(testContext.getDriver());
     }
 
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
-        testContext.driver.get("https://www.automationexercise.com/");
-        testContext.homePage = new HomePage(testContext.driver);
+        this.testContext.getDriver().get("https://www.automationexercise.com/");
 
     }
 
     @When("I click on Signup hyperlink")
     public void iClickOnSignupLogInHyperlink() {
-        testContext.homePage.clickSignUpBtn();
-        testContext.signUpPage = new SignUpPage(testContext.driver);
-        Assert.assertEquals(testContext.signUpPage.getSignUpHeader(),"New User Signup!");
+        this.homePage.clickSignUpBtn();
+        Assert.assertEquals("New User Signup!", this.signUpPage.getSignUpHeader());
     }
 
     @And("I enter username {string} and email {string}")
     public void iEnterUsernameAndEmail(String userName, String email) {
-        testContext.signUpPage.enterName(userName);
-        testContext.signUpPage.enterEmail(email);
+        this.signUpPage.enterName(userName);
+        this.signUpPage.enterEmail(email);
     }
 
     @And("I click the Signup button")
     public void iClickTheSignupButton() {
-        testContext.signUpPage.clickSignUpBtn();
+        this.signUpPage.clickSignUpBtn();
     }
 
     @And("I navigate to the Sign Up screen")
     public void iNavigateToTheSignUpScreen() {
-        Assert.assertTrue(Objects.requireNonNull(testContext.driver.getCurrentUrl()).contains("/signup"));
+        Assert.assertTrue(Objects.requireNonNull(this.testContext.getDriver().getCurrentUrl()).contains("/signup"));
     }
 
     @And("I see a message {string}")
     public void iSeeAMessage(String message) {
-        Assert.assertEquals(testContext.signUpPage.getAccountInformationHeader(),message);
+        Assert.assertEquals(this.signUpPage.getAccountInformationHeader(),message);
     }
 
     @And("I select checkbox Receive special offers from our partners!")
     public void iSelectCheckbox2() {
-        testContext.signUpPage.selectSpecialOfferCbx();
+        this.signUpPage.selectSpecialOfferCbx();
     }
 
     @And("I select checkbox Sign up for our newsletter!")
     public void iSelectCheckbox1() {
-        testContext.signUpPage.selectNewsLetterCbx();
+        this.signUpPage.selectNewsLetterCbx();
     }
 
     @And("I fulfills my information:")
@@ -76,17 +79,17 @@ public class SignUpSteps {
             String city = row.get(7);
             String zipcode = row.get(8);
             String mobileNumber = row.get(9);
-//            testContext.signUpPage.signUpSecondStep(password,firstName,lastName,companyName,address1,address2,state,city,zipcode,mobileNumber);
-            testContext.signUpPage.enterPassword(password);
-            testContext.signUpPage.enterFirstName(firstName);
-            testContext.signUpPage.enterLastName(lastName);
-            testContext.signUpPage.enterCompanyName(companyName);
-            testContext.signUpPage.enterAddress1(address1);
-            testContext.signUpPage.enterAddress2(address2);
-            testContext.signUpPage.enterState(state);
-            testContext.signUpPage.enterCity(city);
-            testContext.signUpPage.enterZipcode(zipcode);
-            testContext.signUpPage.enterMobileNumber(mobileNumber);
+//            this.signUpPage.signUpSecondStep(password,firstName,lastName,companyName,address1,address2,state,city,zipcode,mobileNumber);
+            this.signUpPage.enterPassword(password);
+            this.signUpPage.enterFirstName(firstName);
+            this.signUpPage.enterLastName(lastName);
+            this.signUpPage.enterCompanyName(companyName);
+            this.signUpPage.enterAddress1(address1);
+            this.signUpPage.enterAddress2(address2);
+            this.signUpPage.enterState(state);
+            this.signUpPage.enterCity(city);
+            this.signUpPage.enterZipcode(zipcode);
+            this.signUpPage.enterMobileNumber(mobileNumber);
 
         }
 
@@ -94,7 +97,7 @@ public class SignUpSteps {
 
     @And("I clicks on Create Account button")
     public void iClicksOnCreateAccountButton() {
-        testContext.signUpPage.clickCreateAccountBtn();
+        this.signUpPage.clickCreateAccountBtn();
     }
 
     @Then("I should be signed up new account successfully")
@@ -104,30 +107,30 @@ public class SignUpSteps {
 
     @And("I should see a message {string} after creating account")
     public void iShouldSeeAMessageAfterCreateAccount(String message) {
-        Assert.assertEquals(testContext.signUpPage.getCreatedAccountLabel(), message);
+        Assert.assertEquals(this.signUpPage.getCreatedAccountLabel(), message);
     }
 
     @And("I click on Continue button after account created")
     public void iClickOnContinueButtonAfterAccountCreated() {
-        testContext.signUpPage.clickContinueBtn();
+        this.signUpPage.clickContinueBtn();
     }
 
     @And("I should see a label {string} is visible")
     public void iShouldSeeALabelLoggedInAsUsernameIsVisible(String message) {
-        Assert.assertEquals(testContext.homePage.getLoggedInLabel(),message);
+        Assert.assertEquals(this.homePage.getLoggedInLabel(),message);
     }
 
     @But("I click on Delete Account hyperlink")
     public void iClickOnDeleteAccountHyperlink() {
-        testContext.homePage.clickDeleteAccountHyperLink();
+        this.homePage.clickDeleteAccountHyperLink();
     }
     @And("I should see a message {string} after deleting account")
     public void iShouldSeeAMessageAfterDeleteAccount(String message) {
-        Assert.assertEquals(testContext.homePage.getDeleteAccountLabel(), message);
+        Assert.assertEquals(this.homePage.getDeleteAccountLabel(), message);
     }
     @And("I click on Continue button after account deleted")
     public void iClickOnContinueButtonAfterAccountDeleted() {
-        testContext.homePage.clickContinueBtn();
+        this.homePage.clickContinueBtn();
     }
 
 //    @Given("I am on the login page")
