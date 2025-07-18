@@ -12,11 +12,11 @@ import java.util.Objects;
 
 
 public class SignUpSteps {
-    private TestContext testContext;
-    private HomePage homePage;
-    private SignUpPage signUpPage;
+    private final TestContext testContext;
+    private final HomePage homePage;
+    private final SignUpPage signUpPage;
     // Cucumber will automatically inject this instance if picocontainer is used
-    public SignUpSteps(TestContext testContext) {
+    public SignUpSteps(TestContext testContext ) {
         this.testContext = testContext;
         this.homePage = new HomePage(testContext.getDriver());
         this.signUpPage = new SignUpPage(testContext.getDriver());

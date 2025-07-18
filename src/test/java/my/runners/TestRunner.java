@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @CucumberOptions(
         features = "src/test/resources/features", // Path to your feature files
-        glue = "my.steps",             // Package where your step definitions are located
+        glue = {"my.steps", "com.base"},             // Package where your step definitions are located
         plugin = {
                 "pretty",                             // Prints Gherkin steps to console
                 "html:target/cucumber-reports/cucumber-html-report.html", // Generates HTML report
