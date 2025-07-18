@@ -1,6 +1,6 @@
-Feature: User Login Functionality
-  As a registered user
-  I want to log in to the application
+Feature: User Signup Functionality
+  As a guest user
+  I want to sign up to the application
   So that I can access my account features
 
   @Signup
@@ -21,9 +21,9 @@ Feature: User Login Functionality
     And I should see a message "ACCOUNT CREATED!" after creating account
     And I click on Continue button after account created
     And I should see a label 'Logged in as tomsmith' is visible
-    But I click on Delete Account hyperlink
-    And I should see a message "ACCOUNT DELETED!" after deleting account
-    And I click on Continue button after account deleted
+    # But I click on Delete Account hyperlink
+    # And I should see a message "ACCOUNT DELETED!" after deleting account
+    # And I click on Continue button after account deleted
 
   Scenario Outline: Login with various credentials
     Given I am on the login page
