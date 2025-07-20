@@ -1,5 +1,6 @@
 package com.pages;
 
+import com.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,8 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Random;
 
-public class SignUpPage {
-    private final WebDriver driver;
+public class SignUpPage extends BasePage {
 
     // 1. Locators
     private final By signUpTxt = By.cssSelector("div.signup-form>h2");
@@ -38,99 +38,79 @@ public class SignUpPage {
     private final By continueBtn = By.cssSelector("a[data-qa='continue-button']");
     // 2. Constructor
     public SignUpPage(WebDriver driver){
-        this.driver=driver;
+        super(driver);
     }
     // 3. Actions
     public String getSignUpHeader(){
-        return driver.findElement(signUpTxt).getText();
+        return getText(signUpTxt);
     }
     public void enterName(String name){
-        driver.findElement(nameTxb).sendKeys(name);
+        inputText(nameTxb,name);
     }
     public void enterEmail(String email){
-        driver.findElement(emailTxb).sendKeys(email);
+       inputText(emailTxb, email);
     }
     public void clickSignUpBtn(){
-        driver.findElement(signUpBtn).click();
+        clickElement(signUpBtn);
     }
     public String getAccountInformationHeader(){
-        return driver.findElement(step2HeaderTxt).getText();
+        return getText(step2HeaderTxt);
     }
     public void selectGender(){
-        driver.findElement(genderRadioBtn).click();
+        clickRandomElements(genderRadioBtn);
     }
     public void enterPassword(String password){
-        driver.findElement(passwordTxb).sendKeys(password);
+        inputText(passwordTxb,password);
     }
     public void selectDateOfBirth(){
-        WebElement dayDdlElement = driver.findElement(selectDayDdl);
-        WebElement monthDdlElement = driver.findElement(selectMonthDdl);
-        WebElement yearDdlElement = driver.findElement(selectYearDdl);
-        Select selectDay = new Select(dayDdlElement);
-        Select selectMonth = new Select(monthDdlElement);
-        Select selectYear = new Select(yearDdlElement);
-        int numberDayOptions = selectDay.getOptions().size();
-        int numberMonthOptions = selectMonth.getOptions().size();
-        int numberYearOptions = selectYear.getOptions().size();
-        Random random = new Random();
-
-        int randomDay = random.nextInt(numberDayOptions)+1;
-        int randomMonth = random.nextInt(numberMonthOptions)+1;
-        int randomYear = random.nextInt(numberYearOptions)+1;
-        selectDay.selectByIndex(randomDay);
-        selectMonth.selectByIndex(randomMonth);
-        selectYear.selectByIndex(randomYear);
-
+        selectDdlRandom(selectDayDdl);
+        selectDdlRandom(selectMonthDdl);
+        selectDdlRandom(selectYearDdl);
     }
     public void selectNewsLetterCbx(){
-        driver.findElement(newsletterCbx).click();
+        clickElement(newsletterCbx);
     }
     public void selectSpecialOfferCbx(){
-        driver.findElement(specialOfferCbx).click();
+        clickElement(specialOfferCbx);
     }
     public void enterFirstName(String firstName){
-        driver.findElement(firstNameTxb).sendKeys(firstName);
+        inputText(firstNameTxb,firstName);
     }
     public void enterLastName(String lastName){
-        driver.findElement(lastNameTxb).sendKeys(lastName);
+        inputText(lastNameTxb,lastName);
     }
     public void enterCompanyName(String companyName){
-        driver.findElement(companyTxb).sendKeys(companyName);
+        inputText(companyTxb, companyName);
     }
     public void enterAddress1(String address){
-        driver.findElement(address1Txb).sendKeys(address);
+        inputText(address1Txb, address);
     }
     public void enterAddress2(String address){
-        driver.findElement(address2Txb).sendKeys(address);
+        inputText(address2Txb, address);
     }
     public void selectCountryDdl(){
-        WebElement countryDdl = driver.findElement(selectCountryDdl);
-        Select selectCountry = new Select(countryDdl);
-        int totalCountryOptions = selectCountry.getOptions().size();
-        Random random = new Random();
-        int randomCountry = random.nextInt(totalCountryOptions)+1;
-        selectCountry.selectByIndex(randomCountry);
+       selectDdlRandom(selectCountryDdl);
     }
     public void enterState(String state){
-        driver.findElement(stateTxb).sendKeys(state);
+        inputText(stateTxb, state);
     }
     public void enterCity(String city){
-        driver.findElement(cityTxb).sendKeys(city);
+        inputText(cityTxb, city);
     }
     public void enterZipcode(String zipcode){
-        driver.findElement(zipcodeTxb).sendKeys(zipcode);
+        inputText(zipcodeTxb, zipcode);
     }
     public void enterMobileNumber(String mobileNumber){
-        driver.findElement(mobileNumberTxb).sendKeys(mobileNumber);
+        inputText(mobileNumberTxb, mobileNumber);
     }
     public void clickCreateAccountBtn(){
-        driver.findElement(createAccountBtn).click();
+        clickElement(createAccountBtn);
     }
     public String getCreatedAccountLabel(){
-        return driver.findElement(accountCreatedLabel).getText();
+        return getText(accountCreatedLabel);
     }
     public void clickContinueBtn(){
-        driver.findElement(continueBtn).click();
+        clickElement(continueBtn);
     }
     public SignUpPage signUpFirstStep(String name, String email){
         enterName(name);

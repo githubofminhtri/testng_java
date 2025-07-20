@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:" // For ExtentReports
         },
         monochrome = true,                        // Makes console output more readable
-        tags = "@Login"                 // Run scenarios tagged with @Login OR @Smoke (optional)
+        tags = ""                 // Run scenarios tagged with @Login OR @Smoke (optional)
 )
 @RunWith(Cucumber.class)
 public class TestRunner {

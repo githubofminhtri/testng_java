@@ -28,7 +28,7 @@ public class SignUpSteps {
 
     }
 
-    @When("I click on Signup hyperlink")
+    @When("^I click on Signup / Login hyperlink$")
     public void iClickOnSignupLogInHyperlink() {
         this.homePage.clickSignUpBtn();
         Assert.assertEquals("New User Signup!", this.signUpPage.getSignUpHeader());
@@ -50,7 +50,7 @@ public class SignUpSteps {
         Assert.assertTrue(Objects.requireNonNull(this.testContext.getDriver().getCurrentUrl()).contains("/signup"));
     }
 
-    @And("I see a message {string}")
+    @And("I see a header {string}")
     public void iSeeAMessage(String message) {
         Assert.assertEquals(this.signUpPage.getAccountInformationHeader(),message);
     }

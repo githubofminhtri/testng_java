@@ -1,39 +1,39 @@
 package com.base;
 
+import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.time.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Hooks {
     private final TestContext testContext;
+    private final Logger logger;
     public Hooks(TestContext testContext){
         this.testContext = testContext;
+        this.logger = LoggerFactory.getLogger(this.getClass());
     }
 
 
     @Before
     public void setUp(){
-        System.out.println("Before scenario hook executed.");
+        this.logger.info("Before scenario hook executed.");
+    }
+    @AfterStep
+    public void takeScreenShoot(Scenario scenario) {
+        if(scenario.isFailed()){
+            this.logger.error("Step failed");
+            byte[] screenshot = ((TakesScreenshot) testContext.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(screenshot,"image/png","Failed!!!");
+        }
     }
     @After
-    public void tearDown(Scenario scenario) {
-        if (scenario.isFailed()) {
-            try {
-                byte[] screenshot = ((TakesScreenshot) testContext.getDriver()).getScreenshotAs(OutputType.BYTES);
-                scenario.attach(screenshot, "image/png", scenario.getName());
-            } catch (WebDriverException e) {
-                System.err.println("Failed to capture screenshot: " + e.getMessage());
-            }
-        }
+    public void tearDown() {
         testContext.quitDriver(); // Quit the driver after each scenario
-        System.out.println("After scenario hook executed.");
+        this.logger.info("After scenario hook executed.");
     }
 }
