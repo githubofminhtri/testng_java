@@ -3,12 +3,10 @@ package my.steps;
 import com.base.TestContext;
 import com.pages.HomePage;
 import com.pages.LoginPage;
-import com.pages.SignUpPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.TimeoutException;
 
 public class LoginSteps {
     private final TestContext testContext;

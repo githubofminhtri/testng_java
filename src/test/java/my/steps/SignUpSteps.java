@@ -1,10 +1,8 @@
 package my.steps;
-import com.base.Hooks;
 import com.base.TestContext;
 import io.cucumber.java.en.*;
 import com.pages.HomePage;
 import com.pages.SignUpPage;
-import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
 import java.util.List;
 import java.util.Objects;

@@ -1,10 +1,7 @@
 package com.pages;
 
 import com.base.BasePage;
-import org.knowm.xchart.style.markers.None;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
