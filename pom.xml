@@ -25,8 +25,15 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>${cucumber.version}</version>
+            <artifactId>cucumber-testng</artifactId>
+            <version>7.16.1</version>
+        </dependency>
+
+        <!-- TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -35,6 +42,7 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+<!--        selenium-->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -45,7 +53,7 @@
             <artifactId>webdrivermanager</artifactId>
             <version>${webdrivermanager.version}</version>
         </dependency>
-
+<!--        extent report-->
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
@@ -58,12 +66,12 @@
             <version>1.14.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.32</version> <!-- Use the latest version available -->
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--            <version>1.18.32</version> &lt;!&ndash; Use the latest version available &ndash;&gt;-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
         <!-- SLF4J API -->
         <dependency>
@@ -73,11 +81,11 @@
         </dependency>
 
         <!-- Logback implementation -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.4.14</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>ch.qos.logback</groupId>-->
+<!--            <artifactId>logback-classic</artifactId>-->
+<!--            <version>1.4.14</version>-->
+<!--        </dependency>-->
 
     </dependencies>
 

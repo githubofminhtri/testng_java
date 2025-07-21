@@ -23,6 +23,6 @@ Feature: User Signup Functionality
       And I should see a message "ACCOUNT CREATED!" after creating account
       And I click on Continue button after account created
       And I should see a label 'Logged in as tomsmith' is visible
-       But I click on Delete Account hyperlink
-       And I should see a message "ACCOUNT DELETED!" after deleting account
-       And I click on Continue button after account deleted
+      But I click on Delete Account hyperlink
+      And I should see a message "ACCOUNT DELETED!" after deleting account
+      And I click on Continue button after account deleted

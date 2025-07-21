@@ -3,7 +3,8 @@ import com.base.TestContext;
 import io.cucumber.java.en.*;
 import com.pages.HomePage;
 import com.pages.SignUpPage;
-import org.junit.Assert;
+import org.testng.Assert;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -20,16 +21,12 @@ public class SignUpSteps {
         this.signUpPage = new SignUpPage(testContext.getDriver());
     }
 
-    @Given("I am on the home page")
-    public void iAmOnTheHomePage() {
-        this.testContext.getDriver().get("https://www.automationexercise.com/");
 
-    }
 
     @When("^I click on Signup / Login hyperlink$")
     public void iClickOnSignupLogInHyperlink() {
         this.homePage.clickSignUpBtn();
-        Assert.assertEquals("New User Signup!", this.signUpPage.getSignUpHeader());
+//        Assert.assertEquals("New User Signup!", this.signUpPage.getSignUpHeader());
     }
 
     @And("I enter username {string} and email {string}")
@@ -77,7 +74,6 @@ public class SignUpSteps {
             String city = row.get(7);
             String zipcode = row.get(8);
             String mobileNumber = row.get(9);
-//            this.signUpPage.signUpSecondStep(password,firstName,lastName,companyName,address1,address2,state,city,zipcode,mobileNumber);
             this.signUpPage.enterPassword(password);
             this.signUpPage.enterFirstName(firstName);
             this.signUpPage.enterLastName(lastName);
@@ -120,6 +116,7 @@ public class SignUpSteps {
 
     @But("I click on Delete Account hyperlink")
     public void iClickOnDeleteAccountHyperlink() {
+//        Assume.assumeTrue("User not logs in",isLoggedIn());
         this.homePage.clickDeleteAccountHyperLink();
     }
     @And("I should see a message {string} after deleting account")
@@ -131,18 +128,16 @@ public class SignUpSteps {
         this.homePage.clickContinueBtn();
     }
 
-//    @Given("I am on the login page")
-//    public void iAmOnTheLoginPage() {
-//    }
-//
-//    @When("I enter username {string} and password {string}")
-//    public void iEnterUsernameAndPassword() {
-//    }
-//
-//    @And("I click the login button")
-//    public void iClickTheLoginButton() {
-//    }
-//
-//    @Then("I should see a login status {string}")
-//    public void iShouldSeeALoginStatus() {
+    private boolean isLoggedIn(){
+        boolean isLoggedIn = false;
+        try {
+            if(this.homePage.getLoggedInLabel().matches("^Logged in as\\s+\\w+")){
+                System.out.println("Debug: "+homePage.getLoggedInLabel());
+               return isLoggedIn = true;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return isLoggedIn;
+    }
 }

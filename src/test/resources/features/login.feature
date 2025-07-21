@@ -17,14 +17,16 @@ Feature: User Login Functionality
     And I clicks on Create Account button
     Then I should be signed up new account successfully
     And I should see a message "ACCOUNT CREATED!" after creating account
-
+    And I click on Continue button after account created
+    And I click on Logout button
   @Login
   Scenario Outline: Login with various credentials
-#    Given I am on the home page
-    And I click on Signup / Login hyperlink
     When I enter username "<username>" and password "<password>"
     And I click the login button
     Then I should see a login status "<status_message>"
+    But I click on Delete Account hyperlink
+    And I should see a message "ACCOUNT DELETED!" after deleting account
+    And I click on Continue button after account deleted
     Examples:
       | username                 | password | status_message                       |
       | tomsmith9911@yopmail.com | aaa      | Logged in as tomsmith                |

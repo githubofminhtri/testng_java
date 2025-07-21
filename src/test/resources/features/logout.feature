@@ -1,3 +1,5 @@
+
+@Logout_delete
 Feature: Logout account and Delete account
   As a registered user
   I want to delete my account or log out my account after log in to the application
