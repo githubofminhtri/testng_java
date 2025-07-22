@@ -2,6 +2,7 @@ package com.pages;
 
 import com.base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 
 public class SignUpPage extends BasePage {
@@ -32,6 +33,7 @@ public class SignUpPage extends BasePage {
     private final By createAccountBtn = By.cssSelector("button[data-qa='create-account']");
     private final By accountCreatedLabel = By.cssSelector("h2[data-qa='account-created'] > b");
     private final By continueBtn = By.cssSelector("a[data-qa='continue-button']");
+    private final By errorMessage = By.cssSelector("form[action='/signup'] p");
     // 2. Constructor
     public SignUpPage(WebDriver driver){
         super(driver);
@@ -108,6 +110,20 @@ public class SignUpPage extends BasePage {
     public void clickContinueBtn(){
         clickElement(continueBtn);
     }
+    public String getErrorMessage(){
+        try {
+            return getText(errorMessage);
+        } catch (TimeoutException e){
+            return null;
+        }
+
+    }
+    public boolean errorMessageDisplayed(){
+        return elementIsDisplayed(errorMessage);
+    }
+
+
+
     public SignUpPage signUpFirstStep(String name, String email){
         enterName(name);
         enterEmail(email);

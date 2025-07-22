@@ -4,6 +4,7 @@ import io.cucumber.java.en.*;
 import com.pages.HomePage;
 import com.pages.SignUpPage;
 import org.testng.Assert;
+import org.testng.SkipException;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,11 +24,7 @@ public class SignUpSteps {
 
 
 
-    @When("^I click on Signup / Login hyperlink$")
-    public void iClickOnSignupLogInHyperlink() {
-        this.homePage.clickSignUpBtn();
-//        Assert.assertEquals("New User Signup!", this.signUpPage.getSignUpHeader());
-    }
+
 
     @And("I enter username {string} and email {string}")
     public void iEnterUsernameAndEmail(String userName, String email) {
@@ -116,7 +113,6 @@ public class SignUpSteps {
 
     @But("I click on Delete Account hyperlink")
     public void iClickOnDeleteAccountHyperlink() {
-//        Assume.assumeTrue("User not logs in",isLoggedIn());
         this.homePage.clickDeleteAccountHyperLink();
     }
     @And("I should see a message {string} after deleting account")
@@ -126,18 +122,5 @@ public class SignUpSteps {
     @And("I click on Continue button after account deleted")
     public void iClickOnContinueButtonAfterAccountDeleted() {
         this.homePage.clickContinueBtn();
-    }
-
-    private boolean isLoggedIn(){
-        boolean isLoggedIn = false;
-        try {
-            if(this.homePage.getLoggedInLabel().matches("^Logged in as\\s+\\w+")){
-                System.out.println("Debug: "+homePage.getLoggedInLabel());
-               return isLoggedIn = true;
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return isLoggedIn;
     }
 }

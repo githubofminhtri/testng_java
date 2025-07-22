@@ -18,7 +18,7 @@ public class Hooks {
     }
 
 
-    @Before
+    @Before(order = 1)
     public void setUp(){
         this.logger.info("Before scenario hook executed.");
     }
@@ -35,4 +35,5 @@ public class Hooks {
         testContext.quitDriver(); // Quit the driver after each scenario
         this.logger.info("After scenario hook executed.");
     }
+
 }

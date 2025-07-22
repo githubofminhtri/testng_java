@@ -3,10 +3,16 @@ package my.steps;
 import com.base.TestContext;
 import com.pages.HomePage;
 import com.pages.LoginPage;
+import com.pages.SignUpPage;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import my.testdata.TestData;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 
 public class LoginSteps {
     private final TestContext testContext;
@@ -16,8 +22,28 @@ public class LoginSteps {
         this.testContext = testContext;
         this.loginPage = new LoginPage(this.testContext.getDriver());
         this.homePage = new HomePage(this.testContext.getDriver());
-    }
 
+    }
+    @BeforeStep(order = 2, value = "@Login")
+    public void checkAccountExisted(Scenario scenario){
+        testContext.getDriver().get(TestData.baseUrl);
+        homePage.clickSignUpBtn();
+        SignUpPage signUpPage = new SignUpPage(testContext.getDriver());
+        signUpPage.enterName(TestData.userName);
+        signUpPage.enterEmail(TestData.email);
+        signUpPage.clickSignUpBtn();
+        if(signUpPage.errorMessageDisplayed()){
+            loginPage.enterEmail(TestData.email);
+            loginPage.enterPassword(TestData.password);
+            loginPage.clickLoginBtn();
+        }
+        if(!signUpPage.errorMessageDisplayed()){
+            signUpPage.signUpSecondStep(TestData.password,TestData.firstName,TestData.lastName,
+                    TestData.companyName,TestData.address1,TestData.address2,TestData.state,
+                    TestData.city,TestData.zipcode,TestData.mobileNumber);
+        }
+
+    }
     @When("I enter username {string} and password {string}")
     public void iEnterUsernameAndPassword(String arg0, String arg1) {
         loginPage.enterEmail(arg0);
@@ -38,7 +64,6 @@ public class LoginSteps {
         } else {
             status = homePage.getLoggedInLabel();
         }
-        System.out.println("Status: "+ status);
         Assert.assertEquals(status,arg0);
     }
 }

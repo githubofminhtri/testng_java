@@ -3,7 +3,12 @@ package my.steps;
 import com.base.TestContext;
 import com.pages.HomePage;
 import com.pages.SignUpPage;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
+import my.testdata.TestData;
+import org.testng.Assert;
+import org.testng.annotations.Parameters;
 
 public class CommonSteps {
     private final TestContext testContext;
@@ -17,7 +22,14 @@ public class CommonSteps {
     }
     @Given("I am on the home page")
     public void iAmOnTheHomePage() {
-        this.testContext.getDriver().get("https://www.automationexercise.com/");
+        this.testContext.getDriver().get(TestData.baseUrl);
 
+    }
+    @When("^I click on Signup / Login hyperlink$")
+    public void iClickOnSignupLogInHyperlink(Scenario scenario) {
+        this.homePage.clickSignUpBtn();
+        if(scenario.getName().equalsIgnoreCase("Successful sign up with valid credentials")){
+            Assert.assertEquals(this.signUpPage.getSignUpHeader(), "New User Signup!");
+        }
     }
 }
