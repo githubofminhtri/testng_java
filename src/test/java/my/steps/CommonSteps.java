@@ -26,10 +26,8 @@ public class CommonSteps {
 
     }
     @When("^I click on Signup / Login hyperlink$")
-    public void iClickOnSignupLogInHyperlink(Scenario scenario) {
+    public void iClickOnSignupLogInHyperlink() {
         this.homePage.clickSignUpBtn();
-        if(scenario.getName().equalsIgnoreCase("Successful sign up with valid credentials")){
             Assert.assertEquals(this.signUpPage.getSignUpHeader(), "New User Signup!");
-        }
     }
 }

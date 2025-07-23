@@ -24,7 +24,7 @@ public class LoginSteps {
         this.homePage = new HomePage(this.testContext.getDriver());
 
     }
-    @BeforeStep(order = 2, value = "@Login")
+    @Before(order = 2, value = "@Login")
     public void checkAccountExisted(Scenario scenario){
         testContext.getDriver().get(TestData.baseUrl);
         homePage.clickSignUpBtn();
@@ -32,17 +32,15 @@ public class LoginSteps {
         signUpPage.enterName(TestData.userName);
         signUpPage.enterEmail(TestData.email);
         signUpPage.clickSignUpBtn();
-        if(signUpPage.errorMessageDisplayed()){
-            loginPage.enterEmail(TestData.email);
-            loginPage.enterPassword(TestData.password);
-            loginPage.clickLoginBtn();
-        }
-        if(!signUpPage.errorMessageDisplayed()){
+        if(signUpPage.getErrorMessage().equalsIgnoreCase("Email Address already exist!")){
+            System.out.println("Email Address already exist!");
+            return;
+        } else {
             signUpPage.signUpSecondStep(TestData.password,TestData.firstName,TestData.lastName,
                     TestData.companyName,TestData.address1,TestData.address2,TestData.state,
                     TestData.city,TestData.zipcode,TestData.mobileNumber);
+            System.out.println("Sign Up New Account Successfully");
         }
-
     }
     @When("I enter username {string} and password {string}")
     public void iEnterUsernameAndPassword(String arg0, String arg1) {

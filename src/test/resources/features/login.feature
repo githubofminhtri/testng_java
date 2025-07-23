@@ -17,7 +17,7 @@ Feature: User Login Functionality
       And I click on Continue button after account deleted
       Examples:
         | username                 | password | status_message                       |
-        | tomsmith9911@yopmail.com | aaa      | Logged in as tomsmith                |
+        | tri.pham1919@yopmail.com | aaa      | Logged in as tomsmith                |
 
     @Login
     Scenario Outline: Login with invalid credentials

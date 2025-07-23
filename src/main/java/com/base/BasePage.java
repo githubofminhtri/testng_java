@@ -56,7 +56,7 @@ public class BasePage {
         Select select = new Select(waitForVisibility(locator));
         int numberOptions = select.getOptions().size();
         Random random = new Random();
-        int randomNumber = random.nextInt(numberOptions)+1;
+        int randomNumber = random.nextInt(numberOptions);
         select.selectByIndex(randomNumber);
         logger.info("Select option {} in element: {}",randomNumber,locator.toString());
     }
