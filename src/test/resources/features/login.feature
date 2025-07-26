@@ -1,4 +1,5 @@
-Feature: User Login Functionality
+@Login
+Feature: Login Functionality
   As a registered user
   I want to log in to the application
   So that I can access my account features
@@ -7,7 +8,7 @@ Feature: User Login Functionality
       Given I am on the home page
       When I click on Signup / Login hyperlink
 
-    @Login
+    @Login_with_valid_account
     Scenario Outline: Login with valid credentials
       When I enter username "<username>" and password "<password>"
       And I click the login button
@@ -16,10 +17,10 @@ Feature: User Login Functionality
       And I should see a message "ACCOUNT DELETED!" after deleting account
       And I click on Continue button after account deleted
       Examples:
-        | username                 | password | status_message                       |
-        | tri.pham1919@yopmail.com | aaa      | Logged in as tomsmith                |
+        | username                 | password | status_message   |
+        | tri.pham1919@yopmail.com | password | Logged in as tri pham|
 
-    @Login
+    @Login_with_invalid_account
     Scenario Outline: Login with invalid credentials
       When I enter username "<username>" and password "<password>"
       And I click the login button

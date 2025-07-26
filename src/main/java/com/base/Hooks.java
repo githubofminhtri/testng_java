@@ -22,13 +22,19 @@ public class Hooks {
     public void setUp(){
         this.logger.info("Before scenario hook executed.");
     }
+//    @AfterStep
+//    public void takeScreenShoot(Scenario scenario) {
+//        if(scenario.isFailed()){
+//            this.logger.error("Step failed");
+//            byte[] screenshot = ((TakesScreenshot) testContext.getDriver()).getScreenshotAs(OutputType.BYTES);
+//            scenario.attach(screenshot,"image/png","Failed!!!");
+//        }
+//    }
     @AfterStep
-    public void takeScreenShoot(Scenario scenario) {
-        if(scenario.isFailed()){
-            this.logger.error("Step failed");
-            byte[] screenshot = ((TakesScreenshot) testContext.getDriver()).getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot,"image/png","Failed!!!");
-        }
+    public void takeScreenShoot(Scenario scenario){
+        this.logger.info("Status: {}",scenario.getStatus());
+        byte[] screenshot = ((TakesScreenshot) testContext.getDriver()).getScreenshotAs(OutputType.BYTES);
+        scenario.attach(screenshot,"image/png",scenario.getStatus().toString());
     }
     @After
     public void tearDown() {

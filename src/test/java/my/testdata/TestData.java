@@ -12,6 +12,6 @@ public class TestData {
     public final static String address2 = "address 2";
     public final static String state = "state";
     public final static String city = "city";
-    public final static String zipcode = "zipcode";
+    public final static String zipCode = "zipcode";
     public final static String mobileNumber = "mobileNumber";
 }

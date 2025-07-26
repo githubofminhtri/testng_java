@@ -6,8 +6,12 @@ import org.testng.annotations.AfterClass;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"my.steps","com.base"},
-        plugin = {"pretty", "html:target/cucumber-reports.html"},
-        tags = "@Login"
+        plugin = {
+                "pretty",
+                "html:target/cucumber-reports.html",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
+        }
+//        tags = "@Signup"
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 

@@ -1,6 +1,6 @@
 
-@Logout_delete
-Feature: Logout account and Delete account
+@Logout
+Feature: Logout Functionality
   As a registered user
   I want to delete my account or log out my account after log in to the application
   So that I can exit the application and protect my own account
@@ -9,17 +9,9 @@ Feature: Logout account and Delete account
     Background:
       Given I am on the home page
       And I click on Signup / Login hyperlink
-      And I logged in with valid account:
-        | email                    | password |
-        | tomsmith9911@yopmail.com | aaa      |
+      And I logged in with valid account
 
     @Logout
     Scenario: Logout user
       When I click on Logout button
       Then I should be navigated to the Login page
-
-    @Delete
-    Scenario: Delete user
-      When I click on Delete Account hyperlink
-       And I should see a message "ACCOUNT DELETED!" after deleting account
-       And I click on Continue button after account deleted
