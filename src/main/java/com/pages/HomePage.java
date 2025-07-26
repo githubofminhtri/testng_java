@@ -7,20 +7,19 @@ import org.openqa.selenium.WebDriver;
 public class HomePage extends BasePage {
 
     // 1. Locators
-    private final By homeSignUpBtn = By.cssSelector("a[href='/login']");
+    private final By homeSignUpOrLogOutBtn = By.cssSelector("div.shop-menu > ul > li:nth-child(4) a");
     private final By loggedInLabel = By.cssSelector("ul.nav.navbar-nav > li:last-child > a");
     private final By deleteAccountHyperLink = By.cssSelector("ul.nav.navbar-nav > li > a[href='/delete_account']");
     private final By deleteAccountLabel = By.cssSelector("h2[data-qa='account-deleted']>b");
     private final By continueBtn = By.cssSelector("a[data-qa='continue-button']");
-    private final By logOutBtn = By.cssSelector("a[href='/logout']");
     // 2. Constructor
     public HomePage (WebDriver driver){
        super(driver);
 
     }
     // 3. Actions
-    public void clickSignUpBtn(){
-        clickElement(homeSignUpBtn);
+    public void clickSignUpOrLogoutBtn(){
+        clickElement(homeSignUpOrLogOutBtn);
     }
     public String getLoggedInLabel(){
         return getText(loggedInLabel);
@@ -33,9 +32,6 @@ public class HomePage extends BasePage {
     }
     public void clickContinueBtn(){
         clickElement(continueBtn);
-    }
-    public void clickLogOutBtn(){
-        clickElement(logOutBtn);
     }
 }
 

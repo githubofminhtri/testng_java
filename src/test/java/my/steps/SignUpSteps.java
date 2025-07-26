@@ -1,30 +1,42 @@
 package my.steps;
 import com.base.TestContext;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.*;
 import com.pages.HomePage;
 import com.pages.SignUpPage;
+import my.testdata.UserInfo;
 import org.testng.Assert;
-import org.testng.SkipException;
-
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-
-
 
 public class SignUpSteps {
     private final TestContext testContext;
     private final HomePage homePage;
     private final SignUpPage signUpPage;
+    @DataTableType
+    public UserInfo userInfoEntry(Map<String, String> entry){
+        return new UserInfo(
+                entry.get("password"),
+                entry.get("firstName"),
+                entry.get("lastName"),
+                entry.get("companyName"),
+                entry.get("address1"),
+                entry.get("address2"),
+                entry.get("state"),
+                entry.get("city"),
+                entry.get("zipCode"),
+                entry.get("mobileNumber")
+        );
+
+    }
     // Cucumber will automatically inject this instance if picocontainer is used
     public SignUpSteps(TestContext testContext ) {
         this.testContext = testContext;
         this.homePage = new HomePage(testContext.getDriver());
         this.signUpPage = new SignUpPage(testContext.getDriver());
     }
-
-
-
-
 
     @And("I enter username {string} and email {string}")
     public void iEnterUsernameAndEmail(String userName, String email) {
@@ -58,30 +70,18 @@ public class SignUpSteps {
     }
 
     @And("I fulfills my information:")
-    public void iFulfillsMyInformation(List<List<String>> userInformation) {
-        for(int i =1; i<userInformation.size(); i++){
-            List<String> row = userInformation.get(i);
-            String password = row.get(0);
-            String firstName = row.get(1);
-            String lastName = row.get(2);
-            String companyName = row.get(3);
-            String address1 = row.get(4);
-            String address2 = row.get(5);
-            String state = row.get(6);
-            String city = row.get(7);
-            String zipcode = row.get(8);
-            String mobileNumber = row.get(9);
-            this.signUpPage.enterPassword(password);
-            this.signUpPage.enterFirstName(firstName);
-            this.signUpPage.enterLastName(lastName);
-            this.signUpPage.enterCompanyName(companyName);
-            this.signUpPage.enterAddress1(address1);
-            this.signUpPage.enterAddress2(address2);
-            this.signUpPage.enterState(state);
-            this.signUpPage.enterCity(city);
-            this.signUpPage.enterZipcode(zipcode);
-            this.signUpPage.enterMobileNumber(mobileNumber);
-
+    public void iFulfillsMyInformation(List<UserInfo> userInfos) {
+        for (UserInfo userInfo: userInfos){
+            this.signUpPage.enterPassword(userInfo.getPassword());
+            this.signUpPage.enterFirstName(userInfo.getFirstName());
+            this.signUpPage.enterLastName(userInfo.getLastname());
+            this.signUpPage.enterCompanyName(userInfo.getCompanyName());
+            this.signUpPage.enterAddress1(userInfo.getAddress1());
+            this.signUpPage.enterAddress2(userInfo.getAddress2());
+            this.signUpPage.enterState(userInfo.getState());
+            this.signUpPage.enterCity(userInfo.getCity());
+            this.signUpPage.enterZipcode(userInfo.getZipCode());
+            this.signUpPage.enterMobileNumber(userInfo.getMobileNumber());
         }
 
     }

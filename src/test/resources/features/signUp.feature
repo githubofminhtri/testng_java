@@ -1,4 +1,5 @@
-Feature: User Signup Functionality
+@Signup
+Feature: Signup Functionality
   As a guest user
   I want to sign up to the application
   So that I can access my account features
@@ -16,7 +17,7 @@ Feature: User Signup Functionality
       And I select checkbox Sign up for our newsletter!
       And I select checkbox Receive special offers from our partners!
       And I fulfills my information:
-        | password | firstName | lastName | companyName      | address1  | address2  | state | city | zipcode  | mobileNumber  |
+        | password | firstName | lastName | companyName      | address1  | address2  | state | city | zipCode  | mobileNumber  |
         | aaa      | tri       | pham     | tri pham company | address 1 | address 2 | state | city | zip code | mobile number |
       And I clicks on Create Account button
       Then I should be signed up new account successfully
