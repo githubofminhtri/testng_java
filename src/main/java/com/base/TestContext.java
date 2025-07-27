@@ -30,6 +30,8 @@ public class TestContext {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--headless=new"); // Preferred for modern Chrome
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--window-size=1920,1080"); // Set a consistent window size for testing
                 webDriver = new ChromeDriver(options);
                 break;
