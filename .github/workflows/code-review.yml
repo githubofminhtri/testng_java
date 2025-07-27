@@ -1,0 +1,49 @@
+name: Java Code Review
+
+# This workflow runs on every pull request targeting the main branch
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-analyze:
+    # Use the latest version of Ubuntu to run the job
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # 2. Set up JDK 17
+      # You can change '17' to your project's required Java version (e.g., 11, 21)
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: 'maven' # Caches dependencies for faster builds
+
+      # 3. Build with Maven and run tests
+      # This command compiles the code, runs tests, and packages the application.
+      # The build will fail if any tests fail, blocking the PR.
+      - name: Build and Test with Maven
+        run: mvn -B package --file pom.xml
+
+      # 4. (Optional) Run Checkstyle for code style analysis
+      # This requires you to have the Checkstyle plugin configured in your pom.xml
+      - name: Run Checkstyle
+        run: mvn checkstyle:check
+
+      # 5. (Optional) Run CodeQL for security analysis
+      # CodeQL scans for common security vulnerabilities in your code.
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: 'java'
+          
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
