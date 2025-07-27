@@ -32,6 +32,9 @@ public class BasePage {
     }
 
     protected WebElement waitForClickable(By locator){
+        WebElement element = waitForVisibility(locator);
+        JavascriptExecutor js = (JavascriptExecutor) this.driver;
+        js.executeScript("arguments[0].scrollIntoView(true);",element);
         return this.fluentWait.until(ExpectedConditions.elementToBeClickable(locator));
     }
     protected WebElement waitUntil(Function<WebDriver, WebElement> condition){

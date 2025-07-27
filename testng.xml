@@ -1,8 +1,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="AutomationSuite">
-    <test name="CucumberTests">
+<suite name="CrossBrowser" data-provider-thread-count="2" >
+    <test name="ChromeTest" parallel="methods" thread-count="2">
+        <parameter name="browser" value="chrome"/>
         <classes>
             <class name="my.runners.TestRunner"/>
         </classes>
     </test>
+<!--    <test name="SafariTest" parallel="methods" thread-count="2">-->
+<!--        <parameter name="browser" value="safari"/>-->
+<!--        <classes>-->
+<!--            <class name="my.runners.TestRunner"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>
